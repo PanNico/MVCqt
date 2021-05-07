@@ -3,6 +3,19 @@ It helps me to design my applications following a kind of MVC design pattern and
 "design implementing" code.
 
 Compiling instructions:
- - cd Lib
- - ./createRoot.sh
- - for each project in src,
+ - cd Src
+ - ./compile.sh
+
+Install instructions:
+- cd Lib
+- ./install.sh
+
+Clean instructions:
+- cd Lib
+- ./clean.sh
+
+Uninstall instructions:
+- cd Lib
+- ./uninstall.sh
+
+QT VERSION=5.15.2
