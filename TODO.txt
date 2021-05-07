@@ -1,0 +1,1 @@
+- replace qdebug() call with a your debug function; review c++ stream and consider if using a stream is an option..
