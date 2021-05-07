@@ -25,9 +25,22 @@ create_root()
 	echo >> $HEADER
 	echo "#include \"MVCqtModel/mvcqtModel.h\"" >> $HEADER
 #	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
-#	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
+	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
 	echo >> $HEADER
 	echo "#endif" >> $HEADER
+
+}
+
+compile_module()
+{
+	local MODULE_NAME=$1
+	$QMAKE -makefile -unix -o Makefile "CONFIG+=$MODULE_NAME" ../$MODULE_NAME/$MODULE_NAME.pro
+	make
+
+	rm -rf *
+
+	#coping headers
+	cp ../$MODULE_NAME/include/* ../$DEST_INC/$MODULE_NAME
 
 }
 
@@ -39,12 +52,10 @@ cd tmp
 
 #compiling 
 #TO DO WINZOZ
-$QMAKE -makefile -unix -o Makefile "CONFIG+=MVCqtModel" ../MVCqtModel/MVCqtModel.pro
-make
+compile_module "MVCqtModel"
+compile_module "MVCqtController"
 
 #cleaning building dir
 cd ..
 rm -rf tmp
 
-#coping headers
-cp MVCqtModel/include/* $DEST_INC/MVCqtModel
