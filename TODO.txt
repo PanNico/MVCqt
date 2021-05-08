@@ -1,1 +1,2 @@
-- replace qdebug() call with a your debug function; review c++ stream and consider if using a stream is an option..
+- debug class
+- create a branch with a version of the view that show html/css/js pages. Lets standardize the ui!

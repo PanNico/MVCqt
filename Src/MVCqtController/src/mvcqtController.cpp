@@ -1,5 +1,4 @@
 #include "../include/mvcqtController.h"
-#include <QDebug>
 #include <iostream>
 
 using namespace std;
@@ -9,13 +8,13 @@ MVCqtController::MVCqtController(QObject *parent) :
     model(new MVCqtModel(this))
 {
 
-    qDebug() << "MVCqtController created";
-    cout << "guarda qua" << endl;
+    cout << "MVCqtController created" << endl;
+
 }
 
 MVCqtController::~MVCqtController()
 {
-    qDebug() << "MVCqtController destroied";
+    cout << "MVCqtController destroied" << endl;
 }
 
 
@@ -28,7 +27,7 @@ void MVCqtController::defaultConnections()
 
 void MVCqtController::start()
 {
-    qDebug() << "MVCqtController started";
+    cout << "MVCqtController started" << endl;
     defaultConnections();
     emit model_channel_tx("start");
 
@@ -36,5 +35,5 @@ void MVCqtController::start()
 
 void MVCqtController::model_channel_rx(QString cmd)
 {
-    qDebug() << "MVCqtController received message " << cmd << " from MVCqtModel";
+    cout << "MVCqtController received message " << cmd.toStdString() << " from MVCqtModel" << endl;
 }

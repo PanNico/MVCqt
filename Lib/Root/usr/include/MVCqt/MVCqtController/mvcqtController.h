@@ -26,7 +26,7 @@ class MVCqtController : public QObject
 
     private:
         QSharedPointer<MVCqtModel> model;
-     //   QThread modelThread;
+        QThread modelThread;
 
         void defaultConnections();
 

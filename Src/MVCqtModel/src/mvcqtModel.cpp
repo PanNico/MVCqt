@@ -1,23 +1,24 @@
 #include "../include/mvcqtModel.h"
-#include <QDebug>
+#include <iostream>
+using namespace std;
 
 MVCqtModel::MVCqtModel(QObject *parent) :
     QObject(parent),
     running(false)
 {
-    qDebug() << "MVCqtModel created";
+    cout << "MVCqtModel created" << endl;
 }
 
 MVCqtModel::~MVCqtModel()
 {
-    qDebug() << "MVCqtModel destroied";
+    cout << "MVCqtModel destroied" << endl;
     if(running)
         endModel();
 }
 
 void MVCqtModel::controller_channel_rx(QString cmd)
 {
-    qDebug() << "MVCqtModel received message " << cmd << " from MVCqtController";
+    cout << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtController" << endl;
 
     if( cmd == "start" ){
         startModel();
@@ -26,18 +27,18 @@ void MVCqtModel::controller_channel_rx(QString cmd)
         endModel();
     }
     else{
-        qDebug() << "MVCqtModel received unknown message " << cmd << " from MVCqtController";
+        cout << "MVCqtModel received unknown message " << cmd.toStdString() << " from MVCqtController" << endl;
     }
 }
 
 void MVCqtModel::startModel()
 {
-    qDebug() << "MVCqtModel started";
+    cout << "MVCqtModel started" << endl;
     running=true;
 }
 
 void MVCqtModel::endModel()
 {
-    qDebug() << "MVCqtModel ended";
+    cout << "MVCqtModel ended" << endl;
     running=false;
 }
