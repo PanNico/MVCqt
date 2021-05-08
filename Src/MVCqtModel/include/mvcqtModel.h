@@ -1,27 +1,22 @@
 #ifndef MVCQTMODEL_H
 #define MVCQTMODEL_H
 
-#include <QObject>
+#include <MVCqt/MVCqtActor/mvcqtActor.h>
 
-class MVCqtModel : public QObject
+class MVCqtModel : public MVCqtActor
 {
     Q_OBJECT
 
     public:
-       explicit MVCqtModel(QObject *parent = nullptr);
+       MVCqtModel(QObject *parent = nullptr);
        ~MVCqtModel();
 
     public slots:
-        void controller_channel_rx(QString cmd);
+        void controller_channel_rx(QString cmd) override;
 
     private:
-        bool running; // true when it receives the start cmd
-
-        void startModel();
-        void endModel();
-
-    signals:
-        void controller_channel_tx(QString cmd);
+        void actorStart() override;
+        void actorStop() override;
 
 };
 

@@ -1,24 +1,28 @@
 #include "../include/mvcqtModel.h"
-#include <iostream>
-using namespace std;
 
 MVCqtModel::MVCqtModel(QObject *parent) :
-    QObject(parent),
-    running(false)
+    MVCqtActor(parent)
 {
-    cout << "MVCqtModel created" << endl;
+    #ifdef MVC_QT_DEBUG
+        print_str("MVCqtModel created");
+    #endif
 }
 
 MVCqtModel::~MVCqtModel()
 {
-    cout << "MVCqtModel destroied" << endl;
-    if(running)
-        endModel();
+    #ifdef MVC_QT_DEBUG
+        print_str("MVCqtModel destroied");
+    #endif
 }
 
 void MVCqtModel::controller_channel_rx(QString cmd)
 {
-    cout << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtController" << endl;
+
+#ifdef MVC_QT_DEBUG
+    std::ostringstream ss;
+    ss << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtController";
+    print_str(ss);
+#endif
 
     if( cmd == "start" ){
         startModel();

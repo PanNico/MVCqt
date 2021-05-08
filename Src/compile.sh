@@ -15,16 +15,17 @@ create_root()
 	       rm -rf $ROOT
         fi
 
-	mkdir -p $DEST_LIB/{MVCqtModel,MVCqtView,MVCqtController}
-	mkdir -p $DEST_INC/{MVCqtModel,MVCqtView,MVCqtController}
+	mkdir -p $DEST_LIB/{MVCqtActor,MVCqtModel,MVCqtView,MVCqtController}
+	mkdir -p $DEST_INC/{MVCqtActor,MVCqtModel,MVCqtView,MVCqtController}
 	
 	local HEADER=$DEST_INC"/mvcqt.h"
 
 	echo "#ifndef MVCqt_INCLUDE" > $HEADER
 	echo "#define MVCqt_INCLUDE" >> $HEADER
 	echo >> $HEADER
+	echo "#include \"MVCqtModel/mvcqtActor.h\"" >> $HEADER
 	echo "#include \"MVCqtModel/mvcqtModel.h\"" >> $HEADER
-#	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
+	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
 	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
 	echo >> $HEADER
 	echo "#endif" >> $HEADER
@@ -52,8 +53,9 @@ cd tmp
 
 #compiling 
 #TO DO WINZOZ
-compile_module "MVCqtModel"
-compile_module "MVCqtController"
+compile_module "MVCqtActor"
+#compile_module "MVCqtModel"
+#compile_module "MVCqtController"
 
 #cleaning building dir
 cd ..
