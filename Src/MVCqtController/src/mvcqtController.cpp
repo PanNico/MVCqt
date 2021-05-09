@@ -30,6 +30,7 @@ void MVCqtController::start()
     cout << "MVCqtController started" << endl;
     defaultConnections();
     emit model_channel_tx("start");
+    emit model_channel_tx("hello");
 
 }
 

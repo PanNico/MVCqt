@@ -23,9 +23,10 @@ create_root()
 	echo "#ifndef MVCqt_INCLUDE" > $HEADER
 	echo "#define MVCqt_INCLUDE" >> $HEADER
 	echo >> $HEADER
-	echo "#include \"MVCqtModel/mvcqtActor.h\"" >> $HEADER
+	echo "#include \"MVCqtActor/mvcqtActor.h\"" >> $HEADER
+	echo "#include \"MVCqtActor/mvcqtDebug.h\"" >> $HEADER
 	echo "#include \"MVCqtModel/mvcqtModel.h\"" >> $HEADER
-	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
+#	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
 	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
 	echo >> $HEADER
 	echo "#endif" >> $HEADER
@@ -54,8 +55,8 @@ cd tmp
 #compiling 
 #TO DO WINZOZ
 compile_module "MVCqtActor"
-#compile_module "MVCqtModel"
-#compile_module "MVCqtController"
+compile_module "MVCqtModel"
+compile_module "MVCqtController"
 
 #cleaning building dir
 cd ..

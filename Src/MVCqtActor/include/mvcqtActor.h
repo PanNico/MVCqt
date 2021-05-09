@@ -18,14 +18,13 @@ class MVCqtActor : public QObject
 
     protected:
         bool running; // true when it receives the start cmd
-        QList<std::pair<QString, void (*)()>> command_list;
 
-        void register_cmd(const QString cmd, void (*)());
         virtual void actorStart() = 0;
         virtual void actorStop() = 0;
+        virtual bool cmds_controller_channel(const QString cmd) = 0; // must return true if the comand has been recognized else false
 
     private:
-      //  void startActor();
+        void startActor();
         void endActor();
 
     signals:

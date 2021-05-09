@@ -1,2 +1,3 @@
 - debug class
 - create a branch with a version of the view that show html/css/js pages. Lets standardize the ui!
+- Unit test classes

@@ -11,12 +11,13 @@ class MVCqtModel : public MVCqtActor
        MVCqtModel(QObject *parent = nullptr);
        ~MVCqtModel();
 
-    public slots:
-        void controller_channel_rx(QString cmd) override;
 
     private:
-        void actorStart() override;
-        void actorStop() override;
+       void actorStart() override;
+       void actorStop() override;
+       bool cmds_controller_channel(const QString cmd) override; // must return true if the comand has been recognized else false
+
+
 
 };
 

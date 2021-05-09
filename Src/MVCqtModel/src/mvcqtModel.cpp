@@ -3,46 +3,50 @@
 MVCqtModel::MVCqtModel(QObject *parent) :
     MVCqtActor(parent)
 {
-    #ifdef MVC_QT_DEBUG
-        print_str("MVCqtModel created");
-    #endif
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqtModel created");
+#endif
 }
 
 MVCqtModel::~MVCqtModel()
 {
-    #ifdef MVC_QT_DEBUG
-        print_str("MVCqtModel destroied");
-    #endif
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqtModel destroied");
+#endif
 }
 
-void MVCqtModel::controller_channel_rx(QString cmd)
+void MVCqtModel::actorStart()
 {
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqtModel started");
+#endif
+}
 
+void MVCqtModel::actorStop()
+{
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqtModel ended");
+#endif
+}
+
+bool MVCqtModel::cmds_controller_channel(const QString cmd)  // must return true if the comand has been recognized else false
+{
 #ifdef MVC_QT_DEBUG
     std::ostringstream ss;
     ss << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtController";
     print_str(ss);
 #endif
-
-    if( cmd == "start" ){
-        startModel();
+#ifdef MVC_QT_DEBUG
+    if(cmd == "hello"){
+        print_str("MVCqtModel parsed correctly hello message.");
+        return true;
     }
-    else if( cmd == "end" ){
-        endModel();
-    }
-    else{
-        cout << "MVCqtModel received unknown message " << cmd.toStdString() << " from MVCqtController" << endl;
-    }
+#endif
+#ifdef MVC_QT_DEBUG
+    std::ostringstream ss1;
+    ss1 << "MVCqtModel received unknown message " << cmd.toStdString() << " from MVCqtController";
+    print_str(ss1);
+#endif
+    return false;
 }
 
-void MVCqtModel::startModel()
-{
-    cout << "MVCqtModel started" << endl;
-    running=true;
-}
-
-void MVCqtModel::endModel()
-{
-    cout << "MVCqtModel ended" << endl;
-    running=false;
-}
