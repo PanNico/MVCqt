@@ -1,8 +1,21 @@
 #include "../include/mvcqtView.h"
+#include <QGuiApplication>
+#include <QScreen>
 
-MVCqtView::MVCqtView(QObject *parent) :
-    MVCqtActor(parent)
+MVCqtView::MVCqtView(const QString _html_dir, const int _width, const int _height, QObject *parent) :
+    MVCqtActor(parent),
+    html_window(new QWebEngineView()),
+    html_dir(_html_dir),
+    width(_width),
+    height(_height)
 {
+
+    QRect screenGeom=QGuiApplication::primaryScreen()->geometry();
+
+    html_window->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    html_window->setGeometry(screenGeom.width()/2-width/2, screenGeom.height()/2-height/2, width, height);
+    html_window->setFixedSize(width, height);
+
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView created");
 #endif
@@ -21,6 +34,10 @@ void MVCqtView::actorStart()
     print_str("MVCqtView started");
     emit model_channel_tx("hello");
 #endif
+
+    html_window->load(QUrl("file:"+html_dir+"/index.html"));
+    html_window->show();
+
 }
 
 void MVCqtView::actorStop()

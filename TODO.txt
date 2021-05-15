@@ -1,3 +1,6 @@
 - create a branch with a version of the view that show html/css/js pages. Lets standardize the ui!
 - think an easy interface to this framework
 - move model, view, controller on different threads
+- the controller read a json file where is set the directory with the html/css/js files and the dimention of the window
+- test exit button: the pression of a btn on the html page generate a qt signal...
+

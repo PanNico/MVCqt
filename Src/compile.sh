@@ -53,10 +53,10 @@ cd tmp
 
 #compiling 
 #TO DO WINZOZ
-compile_module "MVCqtActor"
-compile_module "MVCqtModel"
+#compile_module "MVCqtActor"
+#compile_module "MVCqtModel"
 compile_module "MVCqtView"
-compile_module "MVCqtController"
+#compile_module "MVCqtController"
 
 #cleaning building dir
 cd ..

@@ -1,6 +1,9 @@
 #include <QtTest>
-
+#include <QApplication>
 #include <MVCqt/MVCqtView/mvcqtView.h>
+
+static int argc=1;
+static char* argv[]={"MVCqtView_UnitTest"};
 
 class MVCqtView_UnitTest : public QObject
 {
@@ -15,6 +18,7 @@ public:
         void controller_channel_rx(QString msg);
 
     private:
+        QApplication appl;
         MVCqtView view;
 
     private slots:
@@ -26,8 +30,11 @@ public:
         void controller_channel_tx(QString msg);
 };
 
-MVCqtView_UnitTest::MVCqtView_UnitTest()
+MVCqtView_UnitTest::MVCqtView_UnitTest() :
+    appl(argc, argv),
+    view("/home/nicola/Documenti/Progetti/MVCqt/HtmlTemplates/Dimension/", 1000, 900)
 {
+
     connect(this, &MVCqtView_UnitTest::controller_channel_tx, &view, &MVCqtView::controller_channel_rx );
     connect(&view, &MVCqtView::controller_channel_tx, this, &MVCqtView_UnitTest::controller_channel_rx );
 }
@@ -40,6 +47,7 @@ MVCqtView_UnitTest::~MVCqtView_UnitTest()
 void MVCqtView_UnitTest::test_case1()
 {
     emit controller_channel_tx("start");
+    appl.exec();
 }
 
 void MVCqtView_UnitTest::test_case2()
