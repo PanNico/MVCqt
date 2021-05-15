@@ -62,10 +62,14 @@ void MVCqtView_UnitTest::test_case3()
 
 void MVCqtView_UnitTest::controller_channel_rx(QString msg)
 {
+    if(msg=="exit")
+        appl.exit();
+
 #ifdef MVC_QT_DEBUG
     msg="MVCqtView_UnitTest controller_channel_rx recived: "+msg;
     print_str(msg);
 #endif
+
 }
 
 

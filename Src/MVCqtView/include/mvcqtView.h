@@ -28,6 +28,10 @@ class MVCqtView : public MVCqtActor
        void actorStop() override;
        bool cmds_controller_channel(const QString cmd) override; // must return true if the comand has been recognized else false
 
+    private slots:
+       void urlChanged(const QUrl &url);
+       void loadStarted();
+
     signals:
        void model_channel_tx(const QString cmd);
 

@@ -16,6 +16,9 @@ MVCqtView::MVCqtView(const QString _html_dir, const int _width, const int _heigh
     html_window->setGeometry(screenGeom.width()/2-width/2, screenGeom.height()/2-height/2, width, height);
     html_window->setFixedSize(width, height);
 
+    connect(html_window, &QWebEngineView::urlChanged, this, &MVCqtView::urlChanged );
+    connect(html_window, &QWebEngineView::loadStarted, this, &MVCqtView::loadStarted );
+
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView created");
 #endif
@@ -74,3 +77,32 @@ void MVCqtView::model_channel_rx(const QString cmd)
 #endif
 }
 
+void MVCqtView::urlChanged(const QUrl &url)
+{
+    QString str_url(url.toString());
+#ifdef MVC_QT_DEBUG
+    if(str_url.indexOf('#') >= 0){
+        std::ostringstream ss;
+        ss << "MVCqtView received from UI message: " << str_url.mid(str_url.indexOf("#")+1).toStdString();
+        print_str(ss);
+    }
+#endif
+
+    if(str_url.indexOf('#') >= 0){
+        QString msg=str_url.mid(str_url.indexOf("#")+1);
+
+        if(msg == "exit")
+            emit controller_channel_tx(msg);
+    }
+
+}
+
+void MVCqtView::loadStarted()
+{
+#ifdef MVC_QT_DEBUG
+    std::ostringstream ss;
+    ss << "MVCqtView: UI has started load a new page...";
+    print_str(ss);
+#endif
+
+}
