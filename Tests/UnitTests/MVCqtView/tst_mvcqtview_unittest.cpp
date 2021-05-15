@@ -1,6 +1,7 @@
 #include <QtTest>
 #include <QApplication>
 #include <MVCqt/MVCqtView/mvcqtView.h>
+#include <QPointer>
 
 static int argc=1;
 static char* argv[]={"MVCqtView_UnitTest"};
@@ -19,7 +20,7 @@ public:
 
     private:
         QApplication appl;
-        MVCqtView view;
+        QPointer<MVCqtActor> view;
 
     private slots:
         void test_case1();
@@ -32,11 +33,11 @@ public:
 
 MVCqtView_UnitTest::MVCqtView_UnitTest() :
     appl(argc, argv),
-    view("/home/nicola/Documenti/Progetti/MVCqt/HtmlTemplates/Dimension/", 1000, 900)
+    view(new MVCqtView("/home/nicola/Documenti/Progetti/MVCqt/HtmlTemplates/Dimension/", 1000, 900))
 {
 
-    connect(this, &MVCqtView_UnitTest::controller_channel_tx, &view, &MVCqtView::controller_channel_rx );
-    connect(&view, &MVCqtView::controller_channel_tx, this, &MVCqtView_UnitTest::controller_channel_rx );
+    connect(this, &MVCqtView_UnitTest::controller_channel_tx, view.data(), &MVCqtView::controller_channel_rx );
+    connect(view.data(), &MVCqtView::controller_channel_tx, this, &MVCqtView_UnitTest::controller_channel_rx );
 }
 
 MVCqtView_UnitTest::~MVCqtView_UnitTest()

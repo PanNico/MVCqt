@@ -90,9 +90,20 @@ void MVCqtView::urlChanged(const QUrl &url)
 
     if(str_url.indexOf('#') >= 0){
         QString msg=str_url.mid(str_url.indexOf("#")+1);
+        QString recipient=msg.left(msg.indexOf("_"));
+        QString command=msg.mid(msg.indexOf("_")+1);
 
-        if(msg == "exit")
-            emit controller_channel_tx(msg);
+#ifdef MVC_QT_DEBUG
+        print_str("Message for: "+recipient.toStdString());
+        print_str("Command: "+command.toStdString());
+#endif
+        if(recipient == "controller"){
+            emit controller_channel_tx(command);
+        }
+        else if(recipient == "model"){
+            emit model_channel_tx(command);
+        }
+
     }
 
 }
