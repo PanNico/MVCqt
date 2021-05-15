@@ -11,7 +11,7 @@ MVCqtModel::MVCqtModel(QObject *parent) :
 MVCqtModel::~MVCqtModel()
 {
 #ifdef MVC_QT_DEBUG
-    print_str("MVCqtModel destroied");
+    print_str("MVCqtModel destroyed");
 #endif
 }
 
@@ -39,14 +39,26 @@ bool MVCqtModel::cmds_controller_channel(const QString cmd)  // must return true
 #ifdef MVC_QT_DEBUG
     if(cmd == "hello"){
         print_str("MVCqtModel parsed correctly hello message.");
+        emit controller_channel_tx("hello");
         return true;
     }
 #endif
-#ifdef MVC_QT_DEBUG
-    std::ostringstream ss1;
-    ss1 << "MVCqtModel received unknown message " << cmd.toStdString() << " from MVCqtController";
-    print_str(ss1);
-#endif
+
     return false;
+}
+
+void MVCqtModel::view_channel_rx(const QString cmd)
+{
+#ifdef MVC_QT_DEBUG
+    std::ostringstream ss;
+    ss << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtView";
+    print_str(ss);
+#endif
+#ifdef MVC_QT_DEBUG
+    if(cmd == "hello"){
+        print_str("MVCqtModel parsed correctly hello message.");
+        emit view_channel_tx("hello");
+    }
+#endif
 }
 

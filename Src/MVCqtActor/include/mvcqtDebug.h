@@ -9,21 +9,9 @@
 #include <sstream>
 #include <QString>
 
-void print_str(std::string msg)
-{
-    std::cout << msg << std::endl;
-}
-
-void print_str(std::ostringstream &msg)
-{
-    std::cout << msg.str() << std::endl;
-}
-
-
-void print_str(QString &msg)
-{
-    std::cout << msg.toStdString() << std::endl;
-}
+void print_str(std::string msg);
+void print_str(std::ostringstream &msg);
+void print_str(QString &msg);
 
 #endif
 

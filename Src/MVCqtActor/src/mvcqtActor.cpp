@@ -17,7 +17,7 @@ MVCqtActor::~MVCqtActor()
         endActor();
 
 #ifdef MVC_QT_DEBUG
-    print_str("MVCqtActor created");
+    print_str("MVCqtActor destroyed");
 #endif
 }
 
@@ -54,12 +54,13 @@ void MVCqtActor::controller_channel_rx(QString cmd)
         startActor();
         found = true;
     }
-    else if(cmd == "end"){
+    else if(cmd == "stop"){
         endActor();
         found = true;
     }
     else
         found = cmds_controller_channel(cmd);
+
 
     if(!found)
         emit controller_channel_tx("Command not found");

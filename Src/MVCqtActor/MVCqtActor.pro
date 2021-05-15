@@ -10,7 +10,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/mvcqtActor.cpp
+    src/mvcqtActor.cpp \
+    src/mvcqtDebug.cpp
 
 HEADERS += \
     include/mvcqtActor.h \

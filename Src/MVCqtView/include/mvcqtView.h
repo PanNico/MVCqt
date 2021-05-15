@@ -1,9 +1,9 @@
 #ifndef MVCQTVIEW_H
 #define MVCQTVIEW_H
 
-#include <QObject>
+#include <MVCqt/MVCqtActor/mvcqtActor.h>
 
-class MVCqtView : public QObject
+class MVCqtView : public MVCqtActor
 {
     Q_OBJECT
 
@@ -12,8 +12,15 @@ class MVCqtView : public QObject
         ~MVCqtView();
 
     public slots:
-        void controller_channel_rx(QString cmd);
+       void model_channel_rx(const QString cmd);
 
+    private:
+       void actorStart() override;
+       void actorStop() override;
+       bool cmds_controller_channel(const QString cmd) override; // must return true if the comand has been recognized else false
+
+    signals:
+       void model_channel_tx(const QString cmd);
 
 };
 

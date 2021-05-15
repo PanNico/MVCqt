@@ -10,14 +10,25 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/mvcqtModel.cpp
+    src/mvcqtModel.cpp \
+    $$PWD/../MVCqtActor/src/mvcqtActor.cpp \
+    $$PWD/../MVCqtActor/src/mvcqtDebug.cpp
 
 HEADERS += \
-    include/mvcqtModel.h
+    include/mvcqtModel.h \
+    $$PWD/../MVCqtActor/include/mvcqtActor.h \
+    $$PWD/../MVCqtActor/include/mvcqtDebug.h
+
+
 
 # Default rules for deployment.
 unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
     DESTDIR = \"$$IN_PWD/../../Lib/Root/usr/lib/MVCqt/MVCqtModel\"
 }
+
+#win32 {
+#
+#}
+
 !isEmpty(target.path): INSTALLS += target

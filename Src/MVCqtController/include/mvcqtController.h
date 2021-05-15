@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QThread>
 #include <QSharedPointer>
-#include <MVCqt/MVCqtModel/mvcqtModel.h>
+#include <MVCqt/MVCqtActor/mvcqtActor.h>
 
 class MVCqtController : public QObject
 {
@@ -17,21 +17,25 @@ class MVCqtController : public QObject
         void start();
 
     public slots:
-        void model_channel_rx(QString cmd);
+        void model_channel_rx(const QString cmd);
+        void view_channel_rx(const QString cmd);
 
-
+/*
     protected:
         virtual void connections() = 0;
         virtual void endActions() = 0;
-
+*/
     private:
-        QSharedPointer<MVCqtModel> model;
+        QSharedPointer<MVCqtActor> model;
+        QSharedPointer<MVCqtActor> view;
         QThread modelThread;
+        QThread viewThread;
 
         void defaultConnections();
 
     signals:
-        void model_channel_tx(QString cmd);
+        void model_channel_tx(const QString cmd);
+        void view_channel_tx(const QString cmd);
 
 
 

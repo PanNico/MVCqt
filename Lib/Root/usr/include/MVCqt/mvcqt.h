@@ -2,8 +2,8 @@
 #define MVCqt_INCLUDE
 
 #include "MVCqtActor/mvcqtActor.h"
-#include "MVCqtActor/mvcqtDebug.h"
 #include "MVCqtModel/mvcqtModel.h"
+#include "MVCqtView/mvcqtView.h"
 #include "MVCqtController/mvcqtController.h"
 
 #endif
