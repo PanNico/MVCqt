@@ -5,3 +5,4 @@
 - Explain better (add an example) in Readme.md how to use the framework
 - Update readme, You've replaced bash scripts with Makefile...
 - Test framework
+- "Rewrite" all the unittest to work with the new installation method
