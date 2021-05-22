@@ -6,7 +6,9 @@ ROOT=$(PWD)/../Lib/Root
 DEST_INC=$(ROOT)$(INCLUDE_DIR)
 DEST_LIB=$(ROOT)$(LIB_DIR)
 ACTOR=MVCqtActor
-ACTORS=MVCqtModel MVCqtView
+MODEL=MVCqtModel
+VIEW=MVCqtView
+ACTORS=$(MODEL) $(VIEW)
 CONTROLLER=MVCqtController
 FRAMEWORK=MVCqt
 
@@ -21,16 +23,37 @@ make_lib: $(INCLUDE_DIR) $(BUILD_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
     make -f Makefile
 	cp $(FRAMEWORK)/include/* $(ROOT)$(INCLUDE_DIR)
 
-actor: MVCqtActor
-	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$<" ../$</$<.pro; \
+actor: $(ROOT) $(BUILD_DIR) $(ACTOR)
+	mkdir -p $(DEST_LIB)/$(ACTOR)
+	mkdir -p $(DEST_INC)/$(ACTOR)
+	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$(ACTOR)" ../$(ACTOR)/$(ACTOR).pro; \
 	make -f Makefile
+	cp $(ACTOR)/include/* $(DEST_INC)/$(ACTOR)
+	make clean
 
-actors: $(INCLUDE_DIR) $(BUILD_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
-	for act in $(ACTORS); \
-	 do echo "Building $$act..."; echo $(PWD); \
-	 cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$$act" ../$$act/$$act.pro; \
- 	 make -f Makefile; \
-	done
+model: $(ROOT) $(BUILD_DIR) $(ACTOR) $(MODEL)
+	sudo rm -rf $(INCLUDE_DIR)
+	make $(INCLUDE_DIR)
+	mkdir -p $(DEST_LIB)/$(MODEL)
+	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$(MODEL)" ../$(MODEL)/$(MODEL).pro; \
+	make -f Makefile
+	make clean_build_dir
+
+view: $(ROOT) $(BUILD_DIR) $(ACTOR) $(VIEW)
+	sudo rm -rf $(INCLUDE_DIR)
+	make $(INCLUDE_DIR)
+	mkdir -p $(DEST_LIB)/$(VIEW)
+	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$(VIEW)" ../$(VIEW)/$(VIEW).pro; \
+	make -f Makefile
+	make clean_build_dir
+
+controller: $(ROOT) $(BUILD_DIR) $(ACTOR) $(VIEW) $(MODEL) $(CONTROLLER)
+	sudo rm -rf $(INCLUDE_DIR)
+	make $(INCLUDE_DIR)
+	mkdir -p $(DEST_LIB)/$(CONTROLLER)
+	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$(CONTROLLER)" ../$(CONTROLLER)/$(CONTROLLER).pro; \
+	make -f Makefile
+	make clean_build_dir
 
 $(ROOT):
 	rm -rf $(ROOT)
@@ -50,7 +73,8 @@ cp_actors_hdrs: $(INCLUDE_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
 		do cp $$act/include/*  $(INCLUDE_DIR)/$$act; done
 
 clean_build_dir:
-	rm -rf $(BUILD_DIR)
+	sudo rm -rf $(BUILD_DIR)
+	sudo rm -rf $(DEST_INC)/*
 	sudo mv $(INCLUDE_DIR)/* $(DEST_INC)
 	sudo rm -rf $(INCLUDE_DIR)
 
@@ -58,9 +82,12 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 install:
-	sudo cp -r $(ROOT)/* /
+	sudo cp -rv $(ROOT)/* /
+
+rem_root:
+	sudo rm -rf $(ROOT)
 
 uninstall:
 	sudo rm -rf $(INCLUDE_DIR)
 	sudo rm -rf $(LIB_DIR)
-	sudo rm -r $(ROOT)
+	sudo rm -rf $(ROOT)

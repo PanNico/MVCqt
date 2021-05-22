@@ -1,6 +1,26 @@
 #include <QtTest>
 #include <MVCqt/MVCqtActor/mvcqtActor.h>
 
+class MVCqtActorImp : public MVCqtActor
+{
+    Q_OBJECT
+
+    public:
+       MVCqtActorImp(QObject *parent = nullptr) :
+           MVCqtActor(parent)
+       {
+
+       }
+
+       ~MVCqtActorImp(){}
+
+    private:
+       void actorStart() override{}
+       void actorStop() override{}
+       bool cmds_controller_channel(const QString cmd) override{} // must return true if the comand has been recognized else false
+
+};
+
 class MVCqtActor_UnitTest : public QObject
 {
     Q_OBJECT
@@ -13,7 +33,7 @@ class MVCqtActor_UnitTest : public QObject
         void controller_channel_rx(QString msg);
 
     private:
-        MVCqtActor actor;
+        MVCqtActorImp actor;
     private slots:
         void test_case1();
         void test_case2();
