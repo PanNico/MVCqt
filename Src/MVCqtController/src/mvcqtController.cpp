@@ -2,10 +2,10 @@
 #include <MVCqt/MVCqtView/mvcqtView.h>
 #include <MVCqt/MVCqtModel/mvcqtModel.h>
 
-MVCqtController::MVCqtController(QObject *parent) :
+MVCqtController::MVCqtController(MVCqtModel* _backend, const QString _html_dir, const int _window_width, const int _window_height, QObject *parent) :
     QObject(parent),
-    model(new MVCqtModel(this)),
-    view(new MVCqtView(this))
+    model(_backend),
+    view(new MVCqtView(_html_dir, _window_width, _window_height, this))
 {
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtController created");
@@ -48,9 +48,11 @@ void MVCqtController::start()
     defaultConnections();
     emit model_channel_tx("start");
     emit view_channel_tx("start");
+
+#ifdef MVC_QT_DEBUG
     emit model_channel_tx("hello");
     emit view_channel_tx("hello");
-
+#endif
 }
 
 void MVCqtController::model_channel_rx(const QString cmd)

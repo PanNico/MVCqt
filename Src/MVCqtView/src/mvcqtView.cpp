@@ -1,8 +1,24 @@
 #include "../include/mvcqtView.h"
+#include <QGuiApplication>
+#include <QScreen>
 
-MVCqtView::MVCqtView(QObject *parent) :
-    MVCqtActor(parent)
+MVCqtView::MVCqtView(const QString _html_dir, const int _width, const int _height, QObject *parent) :
+    MVCqtActor(parent),
+    html_window(new QWebEngineView()),
+    html_dir(_html_dir),
+    width(_width),
+    height(_height)
 {
+
+    QRect screenGeom=QGuiApplication::primaryScreen()->geometry();
+
+    html_window->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    html_window->setGeometry(screenGeom.width()/2-width/2, screenGeom.height()/2-height/2, width, height);
+    html_window->setFixedSize(width, height);
+
+    connect(html_window, &QWebEngineView::urlChanged, this, &MVCqtView::urlChanged );
+    connect(html_window, &QWebEngineView::loadStarted, this, &MVCqtView::loadStarted );
+
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView created");
 #endif
@@ -21,6 +37,10 @@ void MVCqtView::actorStart()
     print_str("MVCqtView started");
     emit model_channel_tx("hello");
 #endif
+
+    html_window->load(QUrl("file:"+html_dir+"/index.html"));
+    html_window->show();
+
 }
 
 void MVCqtView::actorStop()
@@ -57,3 +77,43 @@ void MVCqtView::model_channel_rx(const QString cmd)
 #endif
 }
 
+void MVCqtView::urlChanged(const QUrl &url)
+{
+    QString str_url(url.toString());
+#ifdef MVC_QT_DEBUG
+    if(str_url.indexOf('#') >= 0){
+        std::ostringstream ss;
+        ss << "MVCqtView received from UI message: " << str_url.mid(str_url.indexOf("#")+1).toStdString();
+        print_str(ss);
+    }
+#endif
+
+    if(str_url.indexOf('#') >= 0){
+        QString msg=str_url.mid(str_url.indexOf("#")+1);
+        QString recipient=msg.left(msg.indexOf("_"));
+        QString command=msg.mid(msg.indexOf("_")+1);
+
+#ifdef MVC_QT_DEBUG
+        print_str("Message for: "+recipient.toStdString());
+        print_str("Command: "+command.toStdString());
+#endif
+        if(recipient == "controller"){
+            emit controller_channel_tx(command);
+        }
+        else if(recipient == "model"){
+            emit model_channel_tx(command);
+        }
+
+    }
+
+}
+
+void MVCqtView::loadStarted()
+{
+#ifdef MVC_QT_DEBUG
+    std::ostringstream ss;
+    ss << "MVCqtView: UI has started load a new page...";
+    print_str(ss);
+#endif
+
+}

@@ -1,4 +1,4 @@
-QT -= gui
+QT += gui webenginewidgets
 
 TEMPLATE = lib
 CONFIG += staticlib

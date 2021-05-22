@@ -5,13 +5,14 @@
 #include <QThread>
 #include <QSharedPointer>
 #include <MVCqt/MVCqtActor/mvcqtActor.h>
+#include <MVCqt/MVCqtModel/mvcqtModel.h>
 
 class MVCqtController : public QObject
 {
     Q_OBJECT
 
     public:
-        explicit MVCqtController(QObject *parent = nullptr);
+        explicit MVCqtController(MVCqtModel* _backend, const QString _html_dir, const int _window_width, const int _window_height, QObject *parent = nullptr);
         ~MVCqtController();
 
         void start();

@@ -12,6 +12,8 @@ class MVCqtModel : public MVCqtActor
        MVCqtModel(QObject *parent = nullptr);
        ~MVCqtModel();
 
+       virtual void run() = 0;
+
     public slots:
        void view_channel_rx(const QString cmd);
 
