@@ -15,20 +15,21 @@ create_root()
 	       rm -rf $ROOT
         fi
 
-	mkdir -p $DEST_LIB/{MVCqtActor,MVCqtModel,MVCqtView,MVCqtController}
+	#mkdir -p $DEST_LIB/{MVCqtActor,MVCqtModel,MVCqtView,MVCqtController}
+	mkdir -p $DEST_LIB
 	mkdir -p $DEST_INC/{MVCqtActor,MVCqtModel,MVCqtView,MVCqtController}
 	
-	local HEADER=$DEST_INC"/mvcqt.h"
+#	local HEADER=$DEST_INC"/mvcqt.h"
 
-	echo "#ifndef MVCqt_INCLUDE" > $HEADER
-	echo "#define MVCqt_INCLUDE" >> $HEADER
-	echo >> $HEADER
-	echo "#include \"MVCqtActor/mvcqtActor.h\"" >> $HEADER
-	echo "#include \"MVCqtModel/mvcqtModel.h\"" >> $HEADER
-	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
-	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
-	echo >> $HEADER
-	echo "#endif" >> $HEADER
+#	echo "#ifndef MVCqt_INCLUDE" > $HEADER
+#	echo "#define MVCqt_INCLUDE" >> $HEADER
+#	echo >> $HEADER
+#	echo "#include \"MVCqtActor/mvcqtActor.h\"" >> $HEADER
+#	echo "#include \"MVCqtModel/mvcqtModel.h\"" >> $HEADER
+#	echo "#include \"MVCqtView/mvcqtView.h\"" >> $HEADER
+#	echo "#include \"MVCqtController/mvcqtController.h\"" >> $HEADER
+#	echo >> $HEADER
+#	echo "#endif" >> $HEADER
 
 }
 
@@ -41,7 +42,21 @@ compile_module()
 	rm -rf *
 
 	#coping headers
-	cp ../$MODULE_NAME/include/* ../$DEST_INC/$MODULE_NAME
+	if [ "$MODULE_NAME" == "MVCqt" ]
+	then
+		for dir in ../MVC*/
+		do
+			local dir=${dir:3:-1}
+			if [ "$dir" == "MVCqt" ]
+			then
+				cp -v ../$dir/include/* ../$DEST_INC/
+			else
+				cp -v ../$dir/include/* ../$DEST_INC/$dir
+			fi
+		done
+	else
+		cp -v ../$MODULE_NAME/include/* ../$DEST_INC/$MODULE_NAME
+	fi
 
 }
 
@@ -56,7 +71,8 @@ cd tmp
 #compile_module "MVCqtActor"
 #compile_module "MVCqtModel"
 #compile_module "MVCqtView"
-compile_module "MVCqtController"
+#compile_module "MVCqtController"
+compile_module "MVCqt"
 
 #cleaning building dir
 cd ..

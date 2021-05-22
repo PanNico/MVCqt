@@ -1,6 +1,7 @@
 #include <QtTest>
 #include <QApplication>
 #include "MVCqt/MVCqtController/mvcqtController.h"
+#include <QtWebEngine>
 
 static int argc=1;
 static char* argv[]={"MVCqtView_UnitTest"};
@@ -26,7 +27,7 @@ MVCqtController_UnitTest::MVCqtController_UnitTest() :
     appl(argc, argv),
     controller("/home/nicola/Documenti/Progetti/MVCqt/HtmlTemplates/Dimension/", 1000, 900)
 {
-
+    QtWebEngine::initialize();
 }
 
 MVCqtController_UnitTest::~MVCqtController_UnitTest()

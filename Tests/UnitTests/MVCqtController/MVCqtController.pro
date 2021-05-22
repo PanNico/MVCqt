@@ -1,4 +1,4 @@
-QT += testlib gui webenginewidgets
+QT += testlib gui webengine webenginewidgets
 
 CONFIG += qt console warn_on depend_includepath testcase
 CONFIG -= app_bundle

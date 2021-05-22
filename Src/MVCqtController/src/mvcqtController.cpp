@@ -2,9 +2,9 @@
 #include <MVCqt/MVCqtView/mvcqtView.h>
 #include <MVCqt/MVCqtModel/mvcqtModel.h>
 
-MVCqtController::MVCqtController(const QString _html_dir, const int _window_width, const int _window_height, QObject *parent) :
+MVCqtController::MVCqtController(MVCqtModel* _backend, const QString _html_dir, const int _window_width, const int _window_height, QObject *parent) :
     QObject(parent),
-    model(new MVCqtModel(this)),
+    model(_backend),
     view(new MVCqtView(_html_dir, _window_width, _window_height, this))
 {
 #ifdef MVC_QT_DEBUG
