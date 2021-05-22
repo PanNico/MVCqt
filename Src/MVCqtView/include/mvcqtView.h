@@ -1,3 +1,9 @@
+/*
+* MIT License
+* Copyright (c) 2021 Nicola Pancheri
+* pancheri.nicola@gmail.com
+*/
+
 #ifndef MVCQTVIEW_H
 #define MVCQTVIEW_H
 

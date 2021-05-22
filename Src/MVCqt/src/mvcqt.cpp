@@ -1,3 +1,9 @@
+/*
+* MIT License
+* Copyright (c) 2021 Nicola Pancheri
+* pancheri.nicola@gmail.com
+*/
+
 #include "../include/mvcqt.h"
 #include <QtWebEngine>
 
@@ -25,4 +31,3 @@ void MVCqt::start()
     controller->start();
     appl->exec();
 }
-

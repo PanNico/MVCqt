@@ -1,3 +1,9 @@
+#
+# MIT License
+# Copyright (c) 2021 Nicola Pancheri
+# pancheri.nicola@gmail.com
+#
+
 QMAKE=/usr/bin/qmake-qt5
 BUILD_DIR=$(PWD)/tmp
 INCLUDE_DIR=/usr/include/MVCqt

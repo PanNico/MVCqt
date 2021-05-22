@@ -1,3 +1,9 @@
+/*
+* MIT License
+* Copyright (c) 2021 Nicola Pancheri
+* pancheri.nicola@gmail.com
+*/
+
 #include <QtTest>
 #include <QApplication>
 #include <MVCqt/MVCqtView/mvcqtView.h>

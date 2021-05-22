@@ -1,3 +1,9 @@
+/*
+* MIT License
+* Copyright (c) 2021 Nicola Pancheri
+* pancheri.nicola@gmail.com
+*/
+
 #include "../include/mvcqtModel.h"
 
 MVCqtModel::MVCqtModel(QObject *parent) :
@@ -61,4 +67,3 @@ void MVCqtModel::view_channel_rx(const QString cmd)
     }
 #endif
 }
-
