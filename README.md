@@ -3,6 +3,7 @@ MIT License
 Copyright (c) 2021 Nicola Pancheri
 pancheri.nicola@gmail.com 
 
+<pre>
 MVCqt is an tiny framework written in C++/Qt (v.5.15.2) to develop desktop
 applications as if they were web applications. The idea is to keep using HTML/CSS/JS even for
 the interface of the desktop applications (but without the need to start an http server).
@@ -39,3 +40,4 @@ Implement the backend of your application composing all the objects that you use
 derived from MVCqtModel.
 Import MVCqt.h and create an object of type MVCqt passing your wrapper class as parameter of the constructor.
 MVCqt.start() to run the application.
+</pre>
