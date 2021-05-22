@@ -74,7 +74,7 @@ cp_actors_hdrs: $(INCLUDE_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
 
 clean_build_dir:
 	sudo rm -rf $(BUILD_DIR)
-	sudo rm -rf $(DEST_INC)/*
+	sudo rm -rf $(DEST_INC)/*/
 	sudo mv $(INCLUDE_DIR)/* $(DEST_INC)
 	sudo rm -rf $(INCLUDE_DIR)
 
