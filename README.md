@@ -29,13 +29,16 @@ Uninstall instructions:
 
 Compiling the single components for unit tests:
  A) Compiling and installing actor:
-  $ make actor && make install
+   $ make actor && make install
+  
  B) Compiling and installing model:
-  $ make model && make install
+   $ make model && make install
+  
  C) Compiling and installing view:
-  $ make view && make install
+   $ make view && make install
+  
  D) Compiling and installing controller:
-  $ make controller && make install
+   $ make controller && make install
 
 HOW TO USE:
 Implement the backend of your application composing all the objects that you use in a big class
