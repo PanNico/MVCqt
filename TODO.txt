@@ -3,5 +3,5 @@
 - the controller read a json file where is set the directory with the html/css/js files and the dimention of the window
 - send a json as reply to a command from UI from the model and show the content of the json in the UI.
 - Explain better (add an example) in Readme.md how to use the framework
-- Update readme
+- Update readme, You've replaced bash scripts with Makefile...
 - Test framework
