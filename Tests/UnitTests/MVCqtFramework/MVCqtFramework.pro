@@ -5,7 +5,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_mvcqtframework_unittest.cpp
+SOURCES +=  tst_mvcqtframework_unittest.cpp \
+            backend/src/modelImp.cpp
 
 unix {
     LIBS += -L/usr/lib/MVCqt -lMVCqt
@@ -16,3 +17,11 @@ unix {
                    /usr/include/MVCqt/MVCqtController \
                    /usr/include/MVCqt
 }
+
+RESOURCES += \
+    conf_file.qrc \
+    frontend.qrc
+
+HEADERS += \
+    backend/include/modelImp.h
+

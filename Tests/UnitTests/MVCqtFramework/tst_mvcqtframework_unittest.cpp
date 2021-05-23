@@ -5,16 +5,7 @@
 */
 
 #include <QtTest>
-#include <MVCqt/mvcqt.h>
-
-class MVCqtModelImp : public MVCqtModel
-{
-    Q_OBJECT
-
-    public:
-        MVCqtModelImp() : MVCqtModel() {}
-        void run() override { std::cout << "Wei sono la tua classe" << std::endl; }
-};
+#include <backend/include/modelImp.h>
 
 class MVCqtFramework_UnitTest : public QObject
 {
@@ -24,6 +15,7 @@ public:
     MVCqtFramework_UnitTest();
     ~MVCqtFramework_UnitTest();
     MVCqt framework;
+
 private slots:
     void test_case1();
 

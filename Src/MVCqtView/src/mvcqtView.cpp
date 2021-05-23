@@ -8,10 +8,10 @@
 #include <QGuiApplication>
 #include <QScreen>
 
-MVCqtView::MVCqtView(const QString _html_dir, const int _width, const int _height, QObject *parent) :
+MVCqtView::MVCqtView(const int _width, const int _height, QObject *parent) :
     MVCqtActor(parent),
     html_window(new QWebEngineView()),
-    html_dir(_html_dir),
+    html_dir(":/frontend/"),
     width(_width),
     height(_height)
 {
@@ -44,7 +44,7 @@ void MVCqtView::actorStart()
     emit model_channel_tx("hello");
 #endif
 
-    html_window->load(QUrl("file:"+html_dir+"/index.html"));
+    html_window->load(QUrl("qrc:/frontend/index.html"));
     html_window->show();
 
 }

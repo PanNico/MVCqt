@@ -16,7 +16,7 @@ class MVCqtView : public MVCqtActor
     Q_OBJECT
 
     public:
-        explicit MVCqtView(const QString _html_dir, const int _width, const int _height, QObject *parent = nullptr);
+        explicit MVCqtView(const int _width, const int _height, QObject *parent = nullptr);
         ~MVCqtView();
 
     public slots:

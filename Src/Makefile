@@ -26,7 +26,7 @@ $(FRAMEWORK): $(ROOT) make_lib clean_build_dir
 
 make_lib: $(INCLUDE_DIR) $(BUILD_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
 	cd  $(BUILD_DIR); $(QMAKE) -makefile -unix -o Makefile "CONFIG+=$(FRAMEWORK)" ../$(FRAMEWORK)/$(FRAMEWORK).pro; \
-    make -f Makefile
+    make -j4 -f Makefile
 	cp $(FRAMEWORK)/include/* $(ROOT)$(INCLUDE_DIR)
 
 actor: $(ROOT) $(BUILD_DIR) $(ACTOR)
