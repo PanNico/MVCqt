@@ -10,3 +10,5 @@
 - Add in MVCqtView throw exception if :/frontend doesn't exist
 - Must implement stop() frontend ->  backend
 - Verify clean closures...
+- Add dir examples: 
+	- first app demo is 4 quadrants and a number associated with each cell and when you press the number the cell change color
