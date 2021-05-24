@@ -29,7 +29,7 @@ MVCqtFramework_UnitTest::MVCqtFramework_UnitTest():
 
 MVCqtFramework_UnitTest::~MVCqtFramework_UnitTest()
 {
-
+    std::cout << "called unit test destructor" << std::endl;
 }
 
 void MVCqtFramework_UnitTest::test_case1()

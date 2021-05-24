@@ -121,10 +121,12 @@ MVCqt::MVCqt(MVCqtModel* _backend, QObject *parent) :
     QByteArray tmp=config->appName.toLocal8Bit();
     application_name[0]=tmp.data();
 
+    QtWebEngine::initialize();
     appl=new QApplication(argc, application_name);
 
-    QtWebEngine::initialize();
     controller = new MVCqtController(_backend, config->windowWidth, config->windowHeight);
+
+    connect(controller, &MVCqtController::stopQAppl, this, &MVCqt::stopQAppl );
 }
 
 MVCqt::~MVCqt()
@@ -134,6 +136,7 @@ MVCqt::~MVCqt()
 #endif
     delete config;
     delete controller;
+    delete appl;
 #ifdef MVC_QT_DEBUG
     print_str("MVCqt Framework ended.");
 #endif
@@ -146,4 +149,15 @@ void MVCqt::start()
 #endif
     controller->start();
     appl->exec();
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqt Framework exit from start.");
+#endif
+}
+
+void MVCqt::stopQAppl()
+{
+#ifdef MVC_QT_DEBUG
+    print_str("Closing MVCqt Framework...");
+#endif
+    appl->quit();
 }

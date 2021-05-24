@@ -9,7 +9,6 @@
 
 #include <MVCqt/MVCqtActor/mvcqtActor.h>
 #include <QWebEngineView>
-#include <QPointer>
 
 class MVCqtView : public MVCqtActor
 {
@@ -23,7 +22,7 @@ class MVCqtView : public MVCqtActor
        void model_channel_rx(const QString cmd);
 
     protected:
-       QPointer<QWebEngineView> html_window;
+       QWebEngineView* html_window;
 
     private:
        const QString html_dir;

@@ -76,7 +76,7 @@ $(BUILD_DIR):
 
 cp_actors_hdrs: $(INCLUDE_DIR) $(ACTOR) $(ACTORS) $(CONTROLLER)
 	for act in $(ACTOR) $(ACTORS) $(CONTROLLER); \
-		do cp $$act/include/*  $(INCLUDE_DIR)/$$act; done
+		do sudo cp $$act/include/*  $(INCLUDE_DIR)/$$act; done
 
 clean_build_dir:
 	sudo rm -rf $(BUILD_DIR)

@@ -10,7 +10,6 @@
 #include <MVCqt/MVCqtController/mvcqtController.h>
 #include <MVCqt/MVCqtModel/mvcqtModel.h>
 #include <QApplication>
-#include <QPointer>
 
 class MVCqt : public QObject
 {
@@ -21,6 +20,9 @@ class MVCqt : public QObject
         ~MVCqt();
 
         void start();
+
+    private slots:
+        void stopQAppl();
 
     private:
         class MVCqtConf{
@@ -40,10 +42,12 @@ class MVCqt : public QObject
 
         MVCqtConf* config;
         MVCqtController* controller;
-        QPointer<QApplication> appl;
+        QApplication* appl;
 
         friend void readConfFile(MVCqt* _this);
         friend void validateConfFile(QJsonDocument& json_conf, MVCqt* _this);
+
+
 
 };
 

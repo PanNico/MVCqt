@@ -1,14 +1,10 @@
-- think an easy interface to this framework
 - move model, view, controller on different threads
 - the controller read a json file where is set the directory with the html/css/js files and the dimention of the window
 - send a json as reply to a command from UI from the model and show the content of the json in the UI.
 - Explain better (add an example) in Readme.md how to use the framework
-- Update readme, You've replaced bash scripts with Makefile...
-- Test framework
 - "Rewrite" all the unittest to work with the new installation method
 - Adapt controller for parameter fullscreen via constructor
 - Add in MVCqtView throw exception if :/frontend doesn't exist
-- Must implement stop() frontend ->  backend
-- Verify clean closures...
 - Add dir examples: 
 	- first app demo is 4 quadrants and a number associated with each cell and when you press the number the cell change color
+- Create script that generate tamplate project

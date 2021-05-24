@@ -20,8 +20,7 @@ MVCqtController::MVCqtController(MVCqtModel* _backend, const int _window_width, 
 
 MVCqtController::~MVCqtController()
 {
-    emit model_channel_tx("stop");
-    emit view_channel_tx("stop");
+
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtController destroyed");
 #endif
@@ -77,4 +76,11 @@ void MVCqtController::view_channel_rx(const QString cmd)
     ss << "MVCqtController received message " << cmd.toStdString() << " from MVCqtView";
     print_str(ss);
 #endif
+
+    if( cmd == "stop" ){
+        emit model_channel_tx("stop");
+        emit view_channel_tx("stop");
+        emit stopQAppl();
+    }
+
 }

@@ -43,7 +43,7 @@ class MVCqtController : public QObject
     signals:
         void model_channel_tx(const QString cmd);
         void view_channel_tx(const QString cmd);
-
+        void stopQAppl();
 
 
 };

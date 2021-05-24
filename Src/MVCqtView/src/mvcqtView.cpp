@@ -32,6 +32,10 @@ MVCqtView::MVCqtView(const int _width, const int _height, QObject *parent) :
 
 MVCqtView::~MVCqtView()
 {
+    html_window->stop();
+    html_window->close();
+    delete html_window;
+
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView destroyed");
 #endif
