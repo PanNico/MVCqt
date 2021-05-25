@@ -10,7 +10,8 @@ the interface of the desktop applications (but without the need to start an http
 This library has been built trying to following the MVC design pattern;
 the MVCqtView instantiate a QWebEngineView object (a qt widget that is used to view and edit 
 web documents) to show the frontend part of the program; the MVCqtModel is the backend, 
-the logic behind your application and you must derive it and pass your derived class to the framework. 
+the logic behind your application and you must derive it and pass your derived class 
+to the framework. 
 The MVCqtController configures and connects MVCqtView and MVCqtModel using qt signals and slots.
 
 This library has been written for my self but if you like/don't like it let me know. :)
@@ -64,7 +65,8 @@ Water, salt, stir, 15 min in the oven and then you have MVCqt.
 
 Implement the backend of your application composing all the objects that you use in a big class
 derived from MVCqtModel.
-Import MVCqt.h and create an object of type MVCqt passing your wrapper class as parameter of the constructor.
+Import MVCqt.h and create an object of type MVCqt passing your wrapper class 
+as parameter of the constructor.
 MVCqt.start() to run the application.
 
 </pre>
