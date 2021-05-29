@@ -77,9 +77,9 @@ class MVCqtController
         #ifdef MVC_QT_DEBUG
             print_str("MVCqtController started");
         #endif
-            while(!stop){
-               callModelRpc(qController.start());
-            }
+
+            qController.start();
+
         }
 
         bool callModelRpc(std::string method_name)

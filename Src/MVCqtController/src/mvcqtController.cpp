@@ -9,24 +9,12 @@ static bool received_rpc=false;
 static std::string rpc_string="";
 static bool initialized=false;
 
-static void thread_sleep(){
-    QObject().thread()->usleep(1000*10);
-}
-
 static std::string read_rpc(){
-    while(!received_rpc){
-        thread_sleep();
-    }
-
     received_rpc =false;
     return rpc_string;
 }
 
 static void write_rpc(std::string method_name){
-    while(received_rpc){
-        thread_sleep();
-    }
-
     rpc_string=method_name;
     received_rpc =true;
 }
