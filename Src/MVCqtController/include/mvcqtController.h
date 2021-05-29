@@ -14,9 +14,6 @@
 #include <MVCqt/MVCqtModel/mvcqtModel.h>
 #include <unordered_map>
 
-template <class CustomModel>
-class MVCqtController;
-
 /*
  * Allows to connect the model and view with signals and slots
  */
@@ -24,9 +21,10 @@ class MVCqtQController : public QObject {
     Q_OBJECT
 
     public:
-        explicit MVCqtQController(const int _window_width, const int _window_height,
-                                    MVCqtActor* model, QApplication* _qapp);
+        explicit MVCqtQController(MVCqtActor* _model, MVCqtActor* _view, QApplication* _qapp);
         ~MVCqtQController();
+
+    public slots:
         std::string start();
 
     private slots:
@@ -36,6 +34,7 @@ class MVCqtQController : public QObject {
 
     private:
         MVCqtActor* model;
+        QThread modelThread;
         MVCqtActor* view;
         QApplication* qapp;
         void defaultConnections();
@@ -55,9 +54,13 @@ class MVCqtController
 
         explicit MVCqtController(QApplication* _qapp, CustomModel* _backend, const int _window_width, const int _window_height):
             model(_backend),
-            qController(_window_width, _window_height, static_cast<MVCqtModel*>(_backend), _qapp),
+            qController(static_cast<MVCqtModel*>(_backend), new MVCqtView(_window_width, _window_height), _qapp),
             stop(true)
         {
+            qController.moveToThread(&qCtrlThread);
+            QObject::connect(&qCtrlThread, &QThread::finished, &qController, &QObject::deleteLater, Qt::QueuedConnection);
+            QObject::connect(&qCtrlThread, &QThread::started, &qController, &MVCqtQController::start, Qt::QueuedConnection);
+
         #ifdef MVC_QT_DEBUG
             print_str("MVCqtController created");
         #endif
@@ -66,6 +69,10 @@ class MVCqtController
         ~MVCqtController()
         {
             stop=true;
+
+            qCtrlThread.quit();
+            qCtrlThread.wait();
+
         #ifdef MVC_QT_DEBUG
             print_str("MVCqtController destroyed");
         #endif
@@ -78,7 +85,7 @@ class MVCqtController
             print_str("MVCqtController started");
         #endif
 
-            qController.start();
+            qCtrlThread.start();
 
         }
 
@@ -103,6 +110,7 @@ class MVCqtController
         std::unordered_map<std::string,ModelMethod> names_to_methods;
         QSharedPointer<CustomModel> model;
         MVCqtQController qController;
+        QThread qCtrlThread;
         bool stop;
 
 

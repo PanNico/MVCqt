@@ -45,7 +45,6 @@ void MVCqtView::actorStart()
 {
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView started");
-    emit model_channel_tx("hello");
 #endif
 
     html_window->load(QUrl("qrc:/frontend/index.html"));

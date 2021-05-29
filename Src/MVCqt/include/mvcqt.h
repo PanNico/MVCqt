@@ -94,6 +94,9 @@ class MVCqt
             print_str("MVCqt Framework start...");
         #endif
             controller->start();
+        #ifdef MVC_QT_DEBUG
+            print_str("MVCqt Framework starting QApplication...");
+        #endif
             appl->exec();
         #ifdef MVC_QT_DEBUG
             print_str("MVCqt Framework exit from start.");
