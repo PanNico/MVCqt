@@ -53,17 +53,4 @@ bool MVCqtModel::cmds_controller_channel(const QString cmd)  // must return true
     return false;
 }
 
-void MVCqtModel::view_channel_rx(const QString cmd)
-{
-#ifdef MVC_QT_DEBUG
-    std::ostringstream ss;
-    ss << "MVCqtModel received message " << cmd.toStdString() << " from MVCqtView";
-    print_str(ss);
-#endif
-#ifdef MVC_QT_DEBUG
-    if(cmd == "hello"){
-        print_str("MVCqtModel parsed correctly hello message.");
-        emit view_channel_tx("hello");
-    }
-#endif
-}
+

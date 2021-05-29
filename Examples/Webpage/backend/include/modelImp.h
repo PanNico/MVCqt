@@ -10,6 +10,10 @@ class MVCqtModelImp : public MVCqtModel
     public:
         MVCqtModelImp();
         void run() override;
+
+        void printHello(){
+            std::cout << "\n################## Print hello! ##################" << std::endl;
+        }
 };
 
 #endif // MODELIMP_H

@@ -20,9 +20,6 @@ class MVCqtModel : public MVCqtActor
 
        virtual void run() = 0;
 
-    public slots:
-       void view_channel_rx(const QString cmd);
-
     private:
        void actorStart() override;
        void actorStop() override;

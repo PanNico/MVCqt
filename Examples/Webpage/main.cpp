@@ -2,7 +2,8 @@
 
 int main()
 {
-    MVCqt framework(new MVCqtModelImp());
+    MVCqt<MVCqtModelImp> framework(new MVCqtModelImp());
+    framework.registerModelRpc("hello", &MVCqtModelImp::printHello);
     framework.start();
     return 0;
 }
