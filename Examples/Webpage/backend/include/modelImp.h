@@ -5,8 +5,6 @@
 
 class MVCqtModelImp : public MVCqtModel
 {
-    Q_OBJECT
-
     public:
         MVCqtModelImp();
         void run() override;
