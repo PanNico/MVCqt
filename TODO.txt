@@ -11,3 +11,4 @@
 - Chiusura thread e' sporca occhio!
 - Take remote parameters...
 - Rewrite UnitTest for new comunication system
+- In questo momentol'rpc viene eseguita del rcps_listener(). Deve essere eseguita invece dal Model nel suo thread!

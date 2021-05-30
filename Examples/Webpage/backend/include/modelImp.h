@@ -10,7 +10,7 @@ class WebPageModel : public MVCqtModel
         void run() override;
 
         void printHello(){
-            std::cout << "\n################## Print hello! ##################" << std::endl;
+            print_str( "\n################## Print hello! ##################\n");
         }
 };
 
