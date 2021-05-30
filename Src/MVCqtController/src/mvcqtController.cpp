@@ -5,25 +5,15 @@
 */
 #include "../include/mvcqtController.h"
 
-static bool received_rpc=false;
-static std::string rpc_string="";
+
 static bool initialized=false;
 
-static std::string read_rpc(){
-    received_rpc =false;
-    return rpc_string;
-}
-
-static void write_rpc(std::string method_name){
-    rpc_string=method_name;
-    received_rpc =true;
-}
-
-MVCqtQController::MVCqtQController(MVCqtActor* _model,  MVCqtActor* _view, QApplication* _qapp ) :
+MVCqtQController::MVCqtQController(MVCqtActor* _model,  MVCqtActor* _view, QApplication* _qapp, RpcsChannel* _rpcs_channel ) :
     QObject(nullptr),
     model(_model),
     view(_view),
-    qapp(_qapp)
+    qapp(_qapp),
+    rpcs_channel(_rpcs_channel)
 {
     model->moveToThread(&modelThread);
 
@@ -40,7 +30,7 @@ MVCqtQController::~MVCqtQController()
 #endif
 }
 
-std::string MVCqtQController::start()
+void MVCqtQController::start()
 {
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtQController started");
@@ -57,8 +47,6 @@ std::string MVCqtQController::start()
         initialized=true;
     }
 
-
-    return read_rpc();
 }
 
 void MVCqtQController::model_channel_rx(const QString cmd)
@@ -97,7 +85,7 @@ void MVCqtQController::view_rx_rpc(const QString cmd)
     print_str(ss);
 #endif
 
-    write_rpc(cmd.toStdString());
+    rpcs_channel->writeRpc(cmd.toStdString());
 }
 
 void MVCqtQController::defaultConnections()
