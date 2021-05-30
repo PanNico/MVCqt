@@ -1,4 +1,4 @@
 #include "../include/modelImp.h"
 
-MVCqtModelImp::MVCqtModelImp() : MVCqtModel() {}
-void MVCqtModelImp::run(){ std::cout << "Wei sono la tua classe" << std::endl; }
+WebPageModel::WebPageModel() : MVCqtModel() {}
+void WebPageModel::run(){ std::cout << "Wei sono la tua classe" << std::endl; }

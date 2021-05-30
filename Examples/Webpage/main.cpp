@@ -2,8 +2,8 @@
 
 int main()
 {
-    MVCqt<MVCqtModelImp> framework(new MVCqtModelImp());
-    framework.registerModelRpc("printHello", &MVCqtModelImp::printHello);
+    MVCqt<WebPageModel> framework(new WebPageModel());
+    framework.registerModelRpc("printHello", &WebPageModel::printHello);
     framework.start();
     return 0;
 }

@@ -3,10 +3,10 @@
 
 #include <MVCqt/mvcqt.h>
 
-class MVCqtModelImp : public MVCqtModel
+class WebPageModel : public MVCqtModel
 {
     public:
-        MVCqtModelImp();
+        WebPageModel();
         void run() override;
 
         void printHello(){
