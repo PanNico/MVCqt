@@ -3,12 +3,13 @@
 * Copyright (c) 2021 Nicola Pancheri
 * pancheri.nicola@gmail.com
 */
-#include "../include/mvcqtController.h"
-
+#include "../include/mvcqtQController.h"
+#include <MVCqt/MVCqtView/mvcqtView.h>
+#include <MVCqt/MVCqtModel/mvcqtModel.h>
 
 static bool initialized=false;
 
-MVCqtQController::MVCqtQController(MVCqtActor* _model,  MVCqtActor* _view, QApplication* _qapp, RpcsChannel* _rpcs_channel ) :
+MVCqtQController::MVCqtQController(std::shared_ptr<MVCqtActor> _model,  MVCqtActor* _view, std::shared_ptr<QApplication> _qapp, RpcsChannel& _rpcs_channel ) :
     QObject(nullptr),
     model(_model),
     view(_view),
@@ -24,7 +25,6 @@ MVCqtQController::MVCqtQController(MVCqtActor* _model,  MVCqtActor* _view, QAppl
 
 MVCqtQController::~MVCqtQController()
 {
-    delete view;
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtQController destroyed");
 #endif
@@ -85,7 +85,7 @@ void MVCqtQController::view_rx_rpc(const QString cmd)
     print_str(ss);
 #endif
 
-    rpcs_channel->writeRpc(cmd.toStdString());
+    rpcs_channel.writeRpc(cmd.toStdString());
 }
 
 void MVCqtQController::defaultConnections()
@@ -93,14 +93,14 @@ void MVCqtQController::defaultConnections()
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtQController creating default connections..");
 #endif
-    connect(&modelThread, &QThread::finished, model, &QObject::deleteLater, Qt::QueuedConnection);
+    connect(&modelThread, &QThread::finished, model.get(), &QObject::deleteLater, Qt::QueuedConnection);
 
-    connect(this, &MVCqtQController::model_channel_tx, model, &MVCqtActor::controller_channel_rx, Qt::QueuedConnection );
-    connect(model, &MVCqtActor::controller_channel_tx, this, &MVCqtQController::model_channel_rx, Qt::QueuedConnection );
-    connect(this, &MVCqtQController::view_channel_tx, view, &MVCqtActor::controller_channel_rx, Qt::QueuedConnection );
-    connect(view, &MVCqtActor::controller_channel_tx, this, &MVCqtQController::view_channel_rx, Qt::QueuedConnection );
-    connect(static_cast<MVCqtModel*>(model), &MVCqtModel::view_channel_tx, static_cast<MVCqtView*>(view), &MVCqtView::model_channel_rx, Qt::QueuedConnection );
-    connect(static_cast<MVCqtView*>(view), &MVCqtView::model_channel_tx, this, &MVCqtQController::view_rx_rpc, Qt::QueuedConnection );
+    connect(this, &MVCqtQController::model_channel_tx, model.get(), &MVCqtActor::controller_channel_rx, Qt::QueuedConnection );
+    connect(model.get(), &MVCqtActor::controller_channel_tx, this, &MVCqtQController::model_channel_rx, Qt::QueuedConnection );
+    connect(this, &MVCqtQController::view_channel_tx, view.get(), &MVCqtActor::controller_channel_rx, Qt::QueuedConnection );
+    connect(view.get(), &MVCqtActor::controller_channel_tx, this, &MVCqtQController::view_channel_rx, Qt::QueuedConnection );
+    connect(static_cast<MVCqtModel*>(model.get()), &MVCqtModel::view_channel_tx, static_cast<MVCqtView*>(view.get()), &MVCqtView::model_channel_rx, Qt::QueuedConnection );
+    connect(static_cast<MVCqtView*>(view.get()), &MVCqtView::model_channel_tx, this, &MVCqtQController::view_rx_rpc, Qt::QueuedConnection );
 
 }
 

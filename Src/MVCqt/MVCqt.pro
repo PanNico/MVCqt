@@ -14,7 +14,7 @@ SOURCES += \
     $$PWD/../MVCqtActor/src/mvcqtDebug.cpp \
     $$PWD/../MVCqtModel/src/mvcqtModel.cpp \
     $$PWD/../MVCqtView/src/mvcqtView.cpp \
-    $$PWD/../MVCqtController/src/mvcqtController.cpp
+    $$PWD/../MVCqtController/src/mvcqtQController.cpp
 
 HEADERS += \
     include/mvcqt.h \
@@ -22,7 +22,10 @@ HEADERS += \
     $$PWD/../MVCqtActor/include/mvcqtDebug.h \
     $$PWD/../MVCqtModel/include/mvcqtModel.h \
     $$PWD/../MVCqtView/include/mvcqtView.h \
-    $$PWD/../MVCqtController/include/mvcqtController.h
+    $$PWD/../MVCqtController/include/mvcqtController.h \
+    $$PWD/../MVCqtController/include/mvcqtQController.h \
+    $$PWD/../MVCqtController/include/rpcsChannel.h \
+    $$PWD/../MVCqtController/include/rpcsListener.h
 
 # Default rules for deployment.
 unix {

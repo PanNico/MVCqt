@@ -66,23 +66,19 @@ class MVCqt
         #endif
             readConfFile(this);
 
-            QByteArray tmp=config->appName.toLocal8Bit();
-            application_name[0]=tmp.data();
+            QByteArray tmp = config->appName.toLocal8Bit();
+            application_name[0] = tmp.data();
 
             QtWebEngine::initialize();
-            appl=QSharedPointer<QApplication>(new QApplication(argc, application_name));
+            appl = std::shared_ptr<QApplication>(new QApplication(argc, application_name));
 
-            controller = new MVCqtController<CustomModel>(appl.data(), _backend, config->windowWidth, config->windowHeight);
+            controller = std::unique_ptr<MVCqtController<CustomModel>>(new MVCqtController<CustomModel>(appl, _backend, config->windowWidth, config->windowHeight));
 
         }
 
         ~MVCqt()
         {
-        #ifdef MVC_QT_DEBUG
-            print_str("Closing MVCqt Framework...");
-        #endif
-            delete config;
-            delete controller;
+
         #ifdef MVC_QT_DEBUG
             print_str("MVCqt Framework ended.");
         #endif
@@ -124,9 +120,9 @@ class MVCqt
                 bool fullscreen;
         };
 
-        MVCqtConf* config;
-        MVCqtController<CustomModel>* controller;
-        QSharedPointer<QApplication> appl;
+        std::unique_ptr<MVCqtConf> config;
+        std::unique_ptr<MVCqtController<CustomModel>> controller;
+        std::shared_ptr<QApplication> appl;
 
 
         static void validateConfFile(QJsonDocument& json_conf, MVCqt* _this)
@@ -166,10 +162,10 @@ class MVCqt
                 if( !window_height.isDouble() || !window_width.isDouble() )
                     throw InvalidConfFieldException();
 
-                _this->config=new MVCqt::MVCqtConf(name, window_height.toInt(), window_width.toInt(), false);
+                _this->config=std::unique_ptr<MVCqtConf>(new MVCqt::MVCqtConf(name, window_height.toInt(), window_width.toInt(), false));
             }
             else{
-                _this->config=new MVCqt::MVCqtConf(name, 0, 0, true);
+                _this->config=std::unique_ptr<MVCqtConf>(new MVCqt::MVCqtConf(name, 0, 0, true));
             }
         }
 
