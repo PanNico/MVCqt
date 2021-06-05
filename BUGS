@@ -1,0 +1,69 @@
+-BUG: sometimes when you close the frame work these are the logs:
+        Thread 0x7f1111ec1040: MVCqtActor created
+        Thread 0x7f1111ec1040: MVCqtModel created
+        Thread 0x7f1111ec1040: MVCqt Framework Constructor
+        Thread 0x7f1111ec1040: MVCqt Framework reading conf file...
+        Thread 0x7f1111ec1040: MVCqt Framework validating json config...
+        Thread 0x7f1111ec1040: MVCqtActor created
+        Thread 0x7f1111ec1040: MVCqtView created
+        Thread 0x7f1111ec1040: MVCqtQController created
+        Thread 0x7f1111ec1040: MVCqtController created
+        Thread 0x7f1111ec1040: MVCqt Framework start...
+        Thread 0x7f1111ec1040: MVCqtController started
+        Thread 0x7f1111ec1040: MVCqt Framework starting QApplication...
+        Thread 0x7f10d9ffb640: MVCqtController rpcs listener started.
+        Thread 0x7f10d97fa640: MVCqtQController started
+        Thread 0x7f10d97fa640: MVCqtQController creating default connections..
+        Thread 0x7f10d8ff9640: MVCqtActor controller_channel_rx
+        Thread 0x7f10d8ff9640: MVCqtActor started
+        Thread 0x7f10d8ff9640: MVCqtModel started
+        Thread 0x7f10d8ff9640: MVCqtActor controller_channel_rx
+        Thread 0x7f10d8ff9640: MVCqtModel received message hello from MVCqtController
+        Thread 0x7f10d8ff9640: MVCqtModel parsed correctly hello message.
+        Thread 0x7f10d97fa640: MVCqtQController received message hello from MVCqtModel
+        Thread 0x7f1111ec1040: MVCqtActor controller_channel_rx
+        Thread 0x7f1111ec1040: MVCqtActor started
+        Thread 0x7f1111ec1040: MVCqtView started
+        Thread 0x7f1111ec1040: MVCqtActor controller_channel_rx
+        Thread 0x7f1111ec1040: MVCqtView received message hello from MVCqtController
+        Thread 0x7f1111ec1040: MVCqtView parsed correctly hello message.
+        Thread 0x7f10d97fa640: MVCqtQController received message hello from MVCqtView
+        Thread 0x7f1111ec1040: MVCqtView: UI has started load a new page...
+        Thread 0x7f1111ec1040: MVCqtView: UI has started load a new page...
+        Thread 0x7f1111ec1040: MVCqtView received from UI message: contact
+        Thread 0x7f1111ec1040: Message for: contact
+        Thread 0x7f1111ec1040: Command: contact
+        Thread 0x7f1111ec1040: MVCqtView: UI has started load a new page...
+        Thread 0x7f1111ec1040: MVCqtView received from UI message: model_printHello
+        Thread 0x7f1111ec1040: Message for: model
+        Thread 0x7f1111ec1040: Command: printHello
+        Thread 0x7f10d97fa640: MVCqtQController received rpc printHello from MVCqtView
+        Thread 0x7f10d9ffb640: MVCqtController received rpc printHello
+        Thread 0x7f10d9ffb640: MVCqtController running rpc...
+        Thread 0x7f10d9ffb640:
+        ################## Print hello! ##################
+
+        Thread 0x7f10d9ffb640: MVCqtController rpc executed!
+        Thread 0x7f1111ec1040: MVCqtView: UI has started load a new page...
+        Thread 0x7f1111ec1040: MVCqtView received from UI message: controller_stop
+        Thread 0x7f1111ec1040: Message for: controller
+        Thread 0x7f1111ec1040: Command: stop
+        Thread 0x7f10d97fa640: MVCqtQController received message stop from MVCqtView
+        Thread 0x7f10d8ff9640: MVCqtActor controller_channel_rx
+        Thread 0x7f10d8ff9640: MVCqtActor ended
+        Thread 0x7f10d8ff9640: MVCqtModel ended
+        Thread 0x7f1111ec1040: MVCqt Framework exit from start.
+        Thread 0x7f1111ec1040: Closing MVCqt Framework...
+        Thread 0x7f10d9ffb640: MVCqtController received rpc
+        Thread 0x7f10d9ffb640: MVCqtController warning: rpc not found
+        Thread 0x7f10d9ffb640: MVCqtController registered rpcs:
+        Thread 0x7f10d9ffb640: printHello
+        Thread 0x7f10d9ffb640: MVCqtController rpcs listener stopped.
+        Thread 0x7f1111ec1040: MVCqtController destroyed
+        Thread 0x7f1111ec1040: MVCqtView destroyed
+        Thread 0x7f1111ec1040: MVCqtActor ended
+        pure virtual method called
+        terminate called without an active exception
+        19:47:44: The program has unexpectedly finished.
+        19:47:44: The process was ended forcefully.
+        19:47:44: /home/nicola/Documenti/Progetti/MVCqt/Examples/build-Webpage-Desktop-Debug/Webpage crashed.

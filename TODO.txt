@@ -3,7 +3,7 @@
 - "Rewrite" all the unittest to work with the new installation method
 - Adapt controller for parameter fullscreen via constructor
 - Add in MVCqtView throw exception if :/frontend doesn't exist
-- Add dir examples: 
+- Add dir examples:
 	- first app demo is 4 quadrants and a number associated with each cell and when you press the number the cell change color
 - Create script that generate tamplate project
 - Sostituire QSharedPointer con std::uniqeprt

@@ -18,7 +18,19 @@
 #include <MVCqt/MVCqtView/mvcqtView.h>
 #include <MVCqt/MVCqtModel/mvcqtModel.h>
 #include <unordered_map>
-
+/*
+ * MVCqtController is the controller following the MVC design pattern. It keeps the instances of the model and the view
+ * and allows them to comunicate.
+ * As you can see in the code below do exist MVCqtController and MVCqtQController: the former is the templatic interface of the
+ * controller the latter keeps the instances of model and view and connect them with signals and slots;
+ * I need MVCqtController because a QObject can't be templatic;
+ * The MVCqtController's controller takes as input every kind of object that extends MVCqtModel and the end user has to register
+ * the association name used in the view and method of the object passed to the constructor through the use
+ *  of  registerModelRpc(std::string method_name, ModelMethod method.
+ *  MVCqtController and MVCqtQController share a their own thread.
+ *
+ *  SPIEGA COME AVVIENE LA COMUNICAZIONE
+ */
 template <class CustomModel>
 class MVCqtController;
 
@@ -33,11 +45,11 @@ class RpcsChannel{
         void writeRpc(std::string msg){
             do{
                 variable_guard.lock();
-                if(!received_rpc){
-                    variable_guard.unlock();
+                if(!received_rpc){               
                     rpc_string=msg;
                     received_rpc=true;
-                    readable.wakeAll();
+                    variable_guard.unlock();
+                    readable.wakeAll();                  
                     return;
                 }
                 variable_guard.unlock();
@@ -59,11 +71,11 @@ class RpcsChannel{
             do{
                 variable_guard.lock();
                 if(received_rpc){
-
                     std::string toRet = rpc_string;
                     rpc_string="";
-                    received_rpc=false;
+                    received_rpc=false; 
                     variable_guard.unlock();
+                    writeable.wakeAll();
                     return toRet;
                 }
                 variable_guard.unlock();
