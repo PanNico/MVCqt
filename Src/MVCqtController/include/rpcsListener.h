@@ -18,17 +18,31 @@ class RpcsListener{
             names_to_methods(_names_to_methods),
             stop(true)
         {
-
+        #ifdef MVC_QT_DEBUG
+            print_str("RpcsListener constructor");
+        #endif
         }
 
-        void stopListener(){
+        ~RpcsListener()
+        {
+        #ifdef MVC_QT_DEBUG
+            print_str("RpcsListener destructor");
+        #endif
+        }
+
+        void stopListener()
+        {
+        #ifdef MVC_QT_DEBUG
+            print_str("RpcsListener stopListener");
+        #endif
             stopMutex.lock();
             stop=true;
             stopMutex.unlock();
 
         }
 
-        bool isStopped(){
+        bool isStopped()
+        {
             bool toRet;
             stopMutex.lock();
             toRet=stop;
@@ -36,7 +50,8 @@ class RpcsListener{
             return toRet;
         }
 
-        void operator()(){
+        void operator()()
+        {
             stop=false;
         #ifdef MVC_QT_DEBUG
             print_str("RpcsListener started.");

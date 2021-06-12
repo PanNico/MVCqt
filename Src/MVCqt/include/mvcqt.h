@@ -68,17 +68,16 @@ class MVCqt
 
             QByteArray tmp = config->appName.toLocal8Bit();
             application_name[0] = tmp.data();
-
             QtWebEngine::initialize();
             appl = std::shared_ptr<QApplication>(new QApplication(argc, application_name));
 
-            controller = std::unique_ptr<MVCqtController<CustomModel>>(new MVCqtController<CustomModel>(appl, _backend, config->windowWidth, config->windowHeight));
+            controller = new MVCqtController<CustomModel>(appl, _backend, config->windowWidth, config->windowHeight);
 
         }
 
         ~MVCqt()
         {
-
+            delete controller;
         #ifdef MVC_QT_DEBUG
             print_str("MVCqt Framework ended.");
         #endif
@@ -121,7 +120,7 @@ class MVCqt
         };
 
         std::unique_ptr<MVCqtConf> config;
-        std::unique_ptr<MVCqtController<CustomModel>> controller;
+        MVCqtController<CustomModel>* controller;
         std::shared_ptr<QApplication> appl;
 
 

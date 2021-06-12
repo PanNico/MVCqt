@@ -51,11 +51,16 @@ class MVCqtController
 
         ~MVCqtController()
         {
+        #ifdef MVC_QT_DEBUG
+            print_str("MVCqtController called destructor");
+        #endif
+            //here the order is important!
             rpcs_channel.close_channel();
             qCtrlThread.quit();
-            qCtrlThread.wait();
             rpcs_listener.stopListener();
             rpcs_listener_thread->join();
+            qCtrlThread.wait();
+
         #ifdef MVC_QT_DEBUG
             print_str("MVCqtController destroyed");
         #endif
