@@ -6,14 +6,10 @@
 - Add dir examples:
 	- first app demo is 4 quadrants and a number associated with each cell and when you press the number the cell change color
 - Create script that generate tamplate project
-- Sostituire QSharedPointer con std::uniqeprt
 - Factories and singleton classes...
-- Chiusura thread e' sporca occhio!
 - Take remote parameters...
 - Rewrite UnitTest for new comunication system
-- In questo momentol'rpc viene eseguita del rcps_listener(). Deve essere eseguita invece dal Model nel suo thread!
 - Introduci modalita' server che permette di transformare la app in web app: l'interfaccia per abilitare
   questa modalita' deve essere un cambo "server=<bool>" in app_settings.conf
 - Unit test dei singoli file del nuovo controller
 - Riscrivere il Makefile per il nuovo controller multifile
-- La nuova chiusura non termina bene. Deadlocka!
