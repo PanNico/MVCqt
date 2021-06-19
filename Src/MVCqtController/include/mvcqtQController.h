@@ -26,6 +26,7 @@ class MVCqtQController : public QObject {
         void view_rx_rpc(const QString cmd);
 
     private:
+        UiQueriesRegister query_register;
         std::shared_ptr<MVCqtActor> model;
         std::unique_ptr<MVCqtActor> view;
         std::shared_ptr<QApplication> qapp;

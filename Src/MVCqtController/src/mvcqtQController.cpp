@@ -36,6 +36,8 @@ void MVCqtQController::start()
     print_str("MVCqtQController started");
 #endif
     if(!initialized){
+        model->setQueryRegister(&query_register);
+        view->setQueryRegister(&query_register);
         defaultConnections();
         modelThread.start();
         emit model_channel_tx("start");

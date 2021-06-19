@@ -96,6 +96,10 @@ void MVCqtView::model_channel_rx(const QString cmd)
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtView valid json!");
 #endif
+
+      /*
+       * retrives the dom values requested and then query_register->write()
+       */
     }
 }
 

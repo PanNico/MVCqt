@@ -1,9 +1,28 @@
 #include "../include/mvcqtActor.h"
 
-using namespace std;
+QVector<QString> UiQueriesRegister::read(QString query_name)
+{
+
+    auto src_result=queries_results.find(query_name);
+
+    while(src_result == queries_results.end()){
+        ready_to_read.wait(&queries_mutex, QDeadlineTimer(100));
+        src_result=queries_results.find(query_name);
+    }
+
+    return src_result->second;
+
+}
+
+void UiQueriesRegister::write(QString query_name, QVector<QString> result)
+{
+    queries_results[query_name]=result;
+    ready_to_read.wakeAll();
+}
 
 MVCqtActor::MVCqtActor(QObject *parent) :
     QObject(parent),
+    query_register(nullptr),
     running(false)
 {
 #ifdef MVC_QT_DEBUG
@@ -19,6 +38,11 @@ MVCqtActor::~MVCqtActor()
 #ifdef MVC_QT_DEBUG
     print_str("MVCqtActor destroyed");
 #endif
+}
+
+void MVCqtActor::setQueryRegister(UiQueriesRegister* _query_register)
+{
+    query_register=_query_register;
 }
 
 void MVCqtActor::startActor()

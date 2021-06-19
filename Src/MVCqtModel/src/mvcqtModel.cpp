@@ -64,7 +64,8 @@ const QString queryToJsonStr(QString& msg_name, QVector<QString>& fields )
     return header+body+tail;
 }
 
-void MVCqtModel::query_ui_fields(QString msg_name, QVector<QString> fields)
+QVector<QString> MVCqtModel::query_ui_fields(QString msg_name, QVector<QString> fields)
 {
     emit view_channel_tx(queryToJsonStr(msg_name,fields));
+    return query_register->read(msg_name);
 }

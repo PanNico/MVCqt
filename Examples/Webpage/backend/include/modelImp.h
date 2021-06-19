@@ -10,7 +10,8 @@ class WebPageModel : public MVCqtModel
         void run() override;
 
         void printHello(){
-            query_ui_fields("get_form_infos", {"#contact_name", "#contact_email", "#contact_message"});
+           QVector<QString> res=query_ui_fields("get_form_infos", {"#contact_name", "#contact_email", "#contact_message"});
+           for(auto str : res) print_str(str);
         }
 
 };
