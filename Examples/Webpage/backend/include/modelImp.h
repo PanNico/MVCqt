@@ -10,8 +10,9 @@ class WebPageModel : public MVCqtModel
         void run() override;
 
         void printHello(){
-            print_str( "\n################## Print hello! ##################\n");
+            query_ui_fields("get_form_infos", {"#contact_name", "#contact_email", "#contact_message"});
         }
+
 };
 
 #endif // MODELIMP_H

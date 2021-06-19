@@ -20,6 +20,13 @@ class MVCqtModel : public MVCqtActor
 
        virtual void run() = 0;
 
+       /*
+        * This function is used to retrives the value of the fields of the DOM.
+        * You can do it also manually using "emit view_channel_tx(json_request)" where
+        * json_request == {"msg_name":["field1", ... ,"fieldn"]}
+        */
+       void query_ui_fields(QString msg_name, QVector<QString> fields);
+
     private:
        void actorStart() override;
        void actorStop() override;

@@ -53,4 +53,18 @@ bool MVCqtModel::cmds_controller_channel(const QString cmd)  // must return true
     return false;
 }
 
+const QString queryToJsonStr(QString& msg_name, QVector<QString>& fields )
+{
+    QString header="{\""+msg_name+"\":[";
+    QString tail="]}";
+    QString body="";
 
+    for( QString& str : fields ) body+="\""+str+"\",";
+    body.remove(body.size()-1,1);
+    return header+body+tail;
+}
+
+void MVCqtModel::query_ui_fields(QString msg_name, QVector<QString> fields)
+{
+    emit view_channel_tx(queryToJsonStr(msg_name,fields));
+}

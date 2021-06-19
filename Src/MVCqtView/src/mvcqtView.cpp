@@ -7,6 +7,7 @@
 #include "../include/mvcqtView.h"
 #include <QGuiApplication>
 #include <QScreen>
+#include <QJsonDocument>
 
 MVCqtView::MVCqtView(const int _width, const int _height, QObject *parent) :
     MVCqtActor(parent),
@@ -88,6 +89,14 @@ void MVCqtView::model_channel_rx(const QString cmd)
     ss << "MVCqtView received message " << cmd.toStdString() << " from MVCqtModel";
     print_str(ss);
 #endif
+
+    QJsonParseError err;
+    QJsonDocument doc = QJsonDocument::fromJson(cmd.toUtf8(), &err);
+    if( err.error == QJsonParseError::NoError){
+#ifdef MVC_QT_DEBUG
+    print_str("MVCqtView valid json!");
+#endif
+    }
 }
 
 void MVCqtView::urlChanged(const QUrl &url)

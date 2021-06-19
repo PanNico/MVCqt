@@ -8,12 +8,12 @@
 #define MVCQTDEBUG_H
 
 #define MVC_QT_DEBUG
-
-#ifdef MVC_QT_DEBUG
-
 #include <iostream>
 #include <sstream>
 #include <QString>
+
+#ifdef MVC_QT_DEBUG
+
 
 void print_str(std::string msg);
 void print_str(std::ostringstream &msg);
